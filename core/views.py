@@ -22,6 +22,18 @@ def registro(request):
     
     return render(request,'registro.html',contexto)
 
+def dados(request,id):
+    user = Usuario.objects.get(pk=id)
+
+    form = UserCreationForm(request.POST or None, instance=user)
+    if form.is_valid():
+        form.save()
+        return redirect('perfil')
+
+    contexto = {
+        'form': form
+    }
+    return render(request, 'registro.html', contexto)
 
 
 """
