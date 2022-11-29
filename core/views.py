@@ -1,12 +1,29 @@
 from django.shortcuts import render,redirect
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import Permission
 from .models import Fornecedor, TipoProduto , Produto, Usuario
-from .forms import FornecedorForm, TipoProdutoForm , ProdutoForm
+from .forms import FornecedorForm, TipoProdutoForm, ProdutoForm, UsuarioCreationForm
 
 @login_required
 def perfil(request):
     return render(request,'perfil.html')
+
+
+
+def registro(request):
+    form = UsuarioCreationForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        return redirect('login')
+    contexto = {
+        'form': form
+    }
+    
+    return render(request,'registro.html',contexto)
+
+
+
 """
 FORNECEDORES
 """
@@ -54,9 +71,6 @@ def fornecedor_remover(request, id):
     frnc = Fornecedor.objects.get(pk=id)
     frnc.delete()
     return redirect('list_fornecedores')
-
-
-
 
 
 
@@ -160,27 +174,3 @@ def produto_remover(request,id):
 
 
 
-
-
-
-
-
-
-
-def cadastro_manual(request):
-    user = Usuario.objects.create_user(
-        username='adsaasas',
-        email='admiaaa@gmail.com',
-        cpf='13192504404',
-        nome='adminaaaro',
-        password='123456',
-        idade=35,
-        is_superuser=False
-    )
-    
-    permission1 = Permission.objects.get(codename='CD')
-    permission2 = Permission.objects.get(codename='RU')
-    user.user_permissions.add(permission1,permission2)
-
-    user.save()
-    return redirect('home')

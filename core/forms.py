@@ -1,5 +1,6 @@
 from django import forms
-from .models import Fornecedor,TipoProduto,Produto
+from django.contrib.auth.forms import UserCreationForm
+from .models import Fornecedor,TipoProduto,Produto, Usuario
 
 class FornecedorForm(forms.ModelForm):
     class Meta:
@@ -15,3 +16,8 @@ class ProdutoForm(forms.ModelForm):
     class Meta:
         model = Produto
         fields = ['modelo','quantidade','fornecedor','equipamento','fotoUm','fotoDois','fotoTres','fotoQuatro','fotoCinco']
+
+class UsuarioCreationForm(UserCreationForm):
+    class Meta:
+        model = Usuario
+        fields = ['username','password1','password2','cpf','email','nome','idade']
