@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>LISTA DE FORNECEDORES</h1>
+    {% for fornec in lista_fornecedores %}
+        <p>{{fornec.nome}}</p>
+        <p>{{fornec.cnpj}}</p>
+        <p>{{fornec.telefone}}</p>
+        <p>{{fornec.codigoPostal}}</p>
+        <p>{{fornec.emailFornecedor}}</p>
+        <img src="/media/{{fornec.fotoFornecedor}}" alt="" width="50px" height="50px">
+        <a href="{% url 'edit_fornecedor' fornec.id %}">EDITAR</a>
+        <a href="{% url 'fornecedore_remover' fornec.id %}">EXCLUIR FORNECEDOR</a>
+    {% empty %}
+        <p>Nenhum fornecedor cadastrado</p>
+    {% endfor %}
+    <h4>CADASTRO DE FORNECEDORES</h4>
+    <a href="{% url 'cad_fornecedores' %}">CADASTRAR FORNECEDOR</a>
+</body>
+</html>
