@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>LISTA DE PRODUTOS</h1>
+    {% for prod in list_produto %}
+    <p>{{prod.modelo}}</p>
+    <p>{{prod.quantidade}}</p>
+    <p>{{prod.fornecedor}}</p>
+    <p>{{prod.equipamento}}</p>
+    <a href="{% url 'edit_produto' prod.id %}">EDITAR</a>
+    <a href="{% url 'del_produto' prod.id %}">DELETAR</a>
+    {% empty %}
+    <p>Nenhum produto cadastrado</p>
+    {% endfor %}
+    <a href="{% url 'cad_produto' %}">CADASTRAR PRODUTO</a>
+</body>
+</html>

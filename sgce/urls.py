@@ -19,17 +19,23 @@ from django.conf.urls.static import static
 from django.urls import path
 from core.views import fornecedor_lista,fornecedor_Edit,fornecedor_cadastro,fornecedor_remover
 from core.views import tipoProduto_Edit,tipoProduto_Cadastro,tipoProduto_Lista,tipoProduto_Remover
+from core.views import produto_lista, produto_edit, produto_cadastro, produto_remover
 
 urlpatterns = [
-    path('fornecedoresEdit/<int:id>',fornecedor_Edit,name='edit_fornecedor'),
-    path('fornecedoresCad/',fornecedor_cadastro,name='cad_fornecedores'),
-    path('fornecedoresList/',fornecedor_lista,name='lista_fornecedores'),
-    path('fornecedoresDelete/<int:id>',fornecedor_remover,name='fornecedore_remover'),
+    path('fornecedorCad/',fornecedor_cadastro,name='cad_fornecedor'),
+    path('fornecedorList/',fornecedor_lista,name='list_fornecedor'),
+    path('fornecedorEdit/<int:id>',fornecedor_Edit,name='edit_fornecedor'),
+    path('fornecedorDelete/<int:id>',fornecedor_remover,name='fornecedor_remover'),
 
-    path('tipoProdutoEdit/<int:id>',tipoProduto_Edit,name='edit_tipoProduto'),
     path('tipoProdutoCad/',tipoProduto_Cadastro,name='cad_tipoProduto'),
-    path('tipoProdutoList/',tipoProduto_Lista,name='lista_tipoProduto'),
+    path('tipoProdutoList/',tipoProduto_Lista,name='list_tipoProduto'),
+    path('tipoProdutoEdit/<int:id>',tipoProduto_Edit,name='edit_tipoProduto'),
     path('tipoProdutoDelete/<int:id>',tipoProduto_Remover,name='del_tipoProduto'),
+
+    path('produtoList/',produto_lista,name='list_produto'),
+    path('produtoCad/',produto_cadastro,name='cad_produto'),
+    path('produtoEdit/<int:id>',produto_edit,name='edit_produto'),
+    path('produtoDelete/<int:id>',produto_remover,name='del_produto'),
 
     path('admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

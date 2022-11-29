@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1>TIPOS DE PRODUTOS</h1>
-    {% for tpProd in lista_tipoProduto %}
+    {% for tpProd in list_tipoProduto %}
     <p>{{tpProd.nome}}</p>
     <a href="{% url 'edit_tipoProduto' tpProd.id %}">EDITAR</a>
     <a href="{% url 'del_tipoProduto' tpProd.id %}">EXCLUIR</a>
