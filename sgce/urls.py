@@ -17,11 +17,17 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path
-from core.views import fornecedor_lista,fornecedor_Edit,fornecedor_cadastro,fornecedor_remover
+from core.views import cadastro_manual,perfil,fornecedor_lista,fornecedor_Edit,fornecedor_cadastro,fornecedor_remover
 from core.views import tipoProduto_Edit,tipoProduto_Cadastro,tipoProduto_Lista,tipoProduto_Remover
 from core.views import produto_lista, produto_edit, produto_cadastro, produto_remover
+from django.contrib.auth.views import LoginView, LogoutView
 
 urlpatterns = [
+    path('perfil/',perfil,name='perfil'),
+    path('login/',LoginView.as_view(),name='login'),
+    path('logout/',LogoutView.as_view(),name='home'),
+    path('cadastro_manual/',cadastro_manual),
+
     path('fornecedorCad/',fornecedor_cadastro,name='cad_fornecedor'),
     path('fornecedorList/',fornecedor_lista,name='list_fornecedor'),
     path('fornecedorEdit/<int:id>',fornecedor_Edit,name='edit_fornecedor'),

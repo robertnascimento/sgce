@@ -7,11 +7,9 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>CADASTRO DE PRODUTOS</h1>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{form}}
-        <button type="submit">CADASTRAR</button>
-    </form>
+    <h1>PÁGINA DE PERFIL</h1>
+    <p>Olá {{user.username}} </p>
+    <p>E-mail: {{user.email}} </p>
+    <p><a href="{% url 'home' %}">Sair</a></p>
 </body>
 </html>

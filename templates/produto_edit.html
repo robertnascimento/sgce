@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1>EDITAR PRODUTOS</h1>
-    <form method="get">
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{form}}
         <p id="botaoform"><input type="submit" value="Atualizar"></p>
