@@ -2,8 +2,14 @@ from django.shortcuts import render,redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import Permission
-from .models import Fornecedor, TipoProduto , Produto, Usuario
-from .forms import FornecedorForm, TipoProdutoForm, ProdutoForm, UsuarioCreationForm
+from .models import Fornecedor, TipoProduto , Produto, Usuario, Retiradas
+from .forms import FornecedorForm, TipoProdutoForm, ProdutoForm, UsuarioCreationForm, RetiradaForm
+
+
+@login_required
+def home(request):
+    return render(request,'home.html')
+
 
 @login_required
 def perfil(request):
@@ -184,5 +190,20 @@ def produto_remover(request,id):
     prd.delete()
     return redirect('list_produto')
 
+def retiradas(request,id):
+    rtr = Produto.objects.get(pk=id)
 
+    form = RetiradaForm(request.POST or None,instance=rtr)
+    
+    
+    if form.is_valid():
+        rtr.quantidade = (rtr.quantidade - 1)
+        rtr.save()
+        form.save()
+        return redirect('list_produto')
 
+    contexto = {
+        'form': form
+    }
+
+    return render(request,'retirada.html',contexto)

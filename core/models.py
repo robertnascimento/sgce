@@ -15,6 +15,9 @@ class Usuario(AbstractUser):
             ("RU","Lerd,Atualizar")
         ]
 
+    def __str__(self):
+        return self.nome
+
 
 class Fornecedor(models.Model):
     nome = models.CharField('Nome', max_length=100,blank=False)
@@ -43,3 +46,13 @@ class Produto(models.Model):
     fotoCinco = models.ImageField('Foto',upload_to='fotosProduto',blank=True)
     fornecedor = models.ForeignKey(Fornecedor,on_delete=models.CASCADE)
     equipamento = models.ForeignKey(TipoProduto,on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.modelo
+
+
+class Retiradas(models.Model):
+    quantidaderet = models.IntegerField('Quantidade',blank=False)
+    produto = models.ForeignKey(Produto,on_delete=models.CASCADE)
+    usuario = models.ForeignKey(Usuario,on_delete=models.CASCADE)
+    

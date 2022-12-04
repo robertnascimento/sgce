@@ -17,14 +17,16 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path
-from core.views import perfil,dados,fornecedor_lista,fornecedor_Edit,fornecedor_cadastro,fornecedor_remover, tipoProduto_Edit,tipoProduto_Cadastro,tipoProduto_Lista,tipoProduto_Remover
-from core.views import produto_lista, produto_edit, produto_cadastro, produto_remover, registro
+from core.views import retiradas,perfil,dados,fornecedor_lista,fornecedor_Edit,fornecedor_cadastro,fornecedor_remover, tipoProduto_Edit,tipoProduto_Cadastro,tipoProduto_Lista
+from core.views import produto_lista, produto_edit, produto_cadastro, produto_remover, registro,tipoProduto_Remover,home
 from django.contrib.auth.views import LoginView, LogoutView
 
 urlpatterns = [
+    path('home/',home,name='home'),
+
     path('perfil/',perfil,name='perfil'),
     path('login/',LoginView.as_view(),name='login'),
-    path('logout/',LogoutView.as_view(),name='home'),
+    path('logout/',LogoutView.as_view(),name='logout'),
     path('registro/',registro ,name='registro'),
     path('dados/<int:id>/',dados,name='edit_dados'),
 
@@ -42,6 +44,8 @@ urlpatterns = [
     path('produtoCad/',produto_cadastro,name='cad_produto'),
     path('produtoEdit/<int:id>',produto_edit,name='edit_produto'),
     path('produtoDelete/<int:id>',produto_remover,name='del_produto'),
+
+    path('retirada/<int:id>/',retiradas,name='retiradas'),
 
     path('admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
