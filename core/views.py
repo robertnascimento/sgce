@@ -192,9 +192,7 @@ def produto_remover(request,id):
 
 def retiradas(request,id):
     rtr = Produto.objects.get(pk=id)
-
     form = RetiradaForm(request.POST or None,instance=rtr)
-    
     
     if form.is_valid():
         rtr.quantidade = (rtr.quantidade - 1)

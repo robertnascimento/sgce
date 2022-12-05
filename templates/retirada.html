@@ -10,7 +10,9 @@
     <h1>RETIRADA DE PRODUTOS</h1>
     <form method="post">
         {% csrf_token %}
-        {{form}}
+        {{form.quantidaderet}}
+        {{form.produto}}
+        {{form.usuario}}
         <p id="botaoform"><input type="submit" value="Atualizar"></p>
     </form>
 </body>
