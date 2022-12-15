@@ -68,10 +68,12 @@
 
     <a href="{% url 'edit_produto' prod.id %}">EDITAR</a>
     <a href="{% url 'del_produto' prod.id %}">DELETAR</a>
+    <a href="{% url 'retiradas' prod.id %}">RETIRAR</a>
     {% empty %}
     <p>Nenhum produto cadastrado</p>
     {% endfor %}
     <a href="{% url 'cad_produto' %}">CADASTRAR PRODUTO</a>
+
   </body>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"

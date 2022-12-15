@@ -7,11 +7,11 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>RETIRADA DE PRODUTOS</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{form.quantidaderet}}
-        <p id="botaoform"><input type="submit" value="Atualizar"></p>
-    </form>
+    
+    {% for rtrd in rtrok %}
+    <p>{{rtrd.quantidaderet}}</p>
+    {% empty %}
+    <p>Não houve retiradas</p>
+    {% endfor %}
 </body>
 </html>

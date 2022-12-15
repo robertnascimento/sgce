@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path
-from core.views import retiradas,perfil,dados,fornecedor_lista,fornecedor_Edit,fornecedor_cadastro,fornecedor_remover, tipoProduto_Edit,tipoProduto_Cadastro,tipoProduto_Lista
+from core.views import retiradasrealizadas,retiradas,perfil,dados,fornecedor_lista,fornecedor_Edit,fornecedor_cadastro,fornecedor_remover, tipoProduto_Edit,tipoProduto_Cadastro,tipoProduto_Lista
 from core.views import produto_lista, produto_edit, produto_cadastro, produto_remover, registro,tipoProduto_Remover,home
 from django.contrib.auth.views import LoginView, LogoutView
 
@@ -46,6 +46,7 @@ urlpatterns = [
     path('produtoDelete/<int:id>',produto_remover,name='del_produto'),
 
     path('retirada/<int:id>/',retiradas,name='retiradas'),
+    path('retiradasrealizadas/',retiradasrealizadas,name='rtrok'),
 
     path('admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

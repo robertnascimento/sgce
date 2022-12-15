@@ -54,7 +54,6 @@ def fornecedor_lista(request):
     return render(request,'fornecedor_lista.html',contexto)
 
 @login_required
-@permission_required('core.CD','core.RU')
 def fornecedor_cadastro(request):
     form = FornecedorForm(request.POST or None,request.FILES or None)
     if form.is_valid():
@@ -68,7 +67,6 @@ def fornecedor_cadastro(request):
     return render(request,'fornecedorcad.html',contexto)
 
 @login_required
-@permission_required('core.RU')
 def fornecedor_Edit(request,id):
     frnc = Fornecedor.objects.get(pk=id)
     
@@ -84,7 +82,6 @@ def fornecedor_Edit(request,id):
     return render(request, 'fornecedor_edit.html', contexto)
 
 @login_required
-@permission_required('core.CD','core.RU')
 def fornecedor_remover(request, id):
     frnc = Fornecedor.objects.get(pk=id)
     frnc.delete()
@@ -105,7 +102,6 @@ def tipoProduto_Lista(request):
     return render(request,'tipoprodutolista.html',contexto)
 
 @login_required
-@permission_required('core.CD','core.RU')
 def tipoProduto_Cadastro(request):
     form = TipoProdutoForm(request.POST or None)
     if form.is_valid():
@@ -119,7 +115,6 @@ def tipoProduto_Cadastro(request):
     return render(request,'tipoprodutocad.html',contexto)
 
 @login_required
-@permission_required('core.RU')
 def tipoProduto_Edit(request,id):
     tprd = TipoProduto.objects.get(pk=id)
 
@@ -135,7 +130,6 @@ def tipoProduto_Edit(request,id):
     return render(request,'tipoprodutoedit.html',contexto)
 
 @login_required
-@permission_required('core.CD','core.RU')
 def tipoProduto_Remover(request,id):
     tprd = TipoProduto.objects.get(pk=id)
     tprd.delete()
@@ -156,7 +150,6 @@ def produto_lista(request):
     return render(request,'produto_lista.html',contexto)
 
 @login_required
-@permission_required('core.CD','core.RU')
 def produto_cadastro(request):
     form = ProdutoForm(request.POST or None,request.FILES or None)
     if form.is_valid():
@@ -169,7 +162,6 @@ def produto_cadastro(request):
     return render(request,'produto_cad.html',contexto)
 
 @login_required
-@permission_required('core.RU')
 def produto_edit(request,id):
     prd = Produto.objects.get(pk=id)
 
@@ -184,24 +176,33 @@ def produto_edit(request,id):
     return render(request,'produto_edit.html',contexto)
 
 @login_required
-@permission_required('core.CD','core.RU')
 def produto_remover(request,id):
     prd = Produto.objects.get(pk=id)
     prd.delete()
     return redirect('list_produto')
 
 def retiradas(request,id):
-    rtr = Produto.objects.get(pk=id)
-    form = RetiradaForm(request.POST or None,instance=rtr)
-    
+    prod = Produto.objects.get(pk=id)
+    form = RetiradaForm(request.POST or None)
+
     if form.is_valid():
-        rtr.quantidade = (rtr.quantidade - 1)
-        rtr.save()
+        qtd = form.cleaned_data['quantidaderet']
+        prod.quantidade = (prod.quantidade - qtd)
         form.save()
+        prod.save()
+    
         return redirect('list_produto')
+
 
     contexto = {
         'form': form
     }
 
     return render(request,'retirada.html',contexto)
+
+def retiradasrealizadas(request):
+    rtrd = Retiradas.objects.all()
+    contexto = {
+        'rtrok': rtrd
+    }
+    return render(request,'retiradasrealizadas.html',contexto)
