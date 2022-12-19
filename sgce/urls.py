@@ -20,9 +20,10 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import include, path
 
 from core.views import (dados, fornecedor_cadastro, fornecedor_Edit,
-                        fornecedor_lista, fornecedor_remover, perfil,
+                        fornecedor_lista, fornecedor_remover, home, perfil,
                         produto_cadastro, produto_edit, produto_lista,
-                        produto_remover, registro, tipoProduto_Cadastro,
+                        produto_remover, registro, retiradas,
+                        retiradasrealizadas, tipoProduto_Cadastro,
                         tipoProduto_Edit, tipoProduto_Lista,
                         tipoProduto_Remover)
 
@@ -32,6 +33,9 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(), name='home'),
     path('registro/', registro, name='registro'),
     path('dados/<int:id>/', dados, name='edit_dados'),
+    path('home/', home, name='home'),
+
+
 
     path('fornecedorCad/', fornecedor_cadastro, name='cad_fornecedor'),
     path('fornecedorList/', fornecedor_lista, name='list_fornecedor'),
@@ -49,6 +53,9 @@ urlpatterns = [
     path('produtoCad/', produto_cadastro, name='cad_produto'),
     path('produtoEdit/<int:id>', produto_edit, name='edit_produto'),
     path('produtoDelete/<int:id>', produto_remover, name='del_produto'),
+
+    path('retirada/<int:id>/', retiradas, name='retiradas'),
+    path('retiradasrealizadas/', retiradasrealizadas, name='rtrok'),
 
     path('admin/', admin.site.urls),
     path("__reload__/", include("django_browser_reload.urls")),
